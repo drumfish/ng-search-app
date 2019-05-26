@@ -1,0 +1,92 @@
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: top;
+  font: inherit;
+  color: inherit;
+  text-size-adjust: none;
+  appearance: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+img,
+object,
+embed {
+  max-width: 100%;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+input[type=button],
+input[type=submit],
+input[type=checkbox],
+input[type=file],
+button,
+label {
+  cursor: pointer;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+main,
+article,
+aside,
+figure,
+footer,
+header,
+nav,
+section,
+details,
+summary {
+  display: block;
+}
+
+a {
+  background: transparent;
+}
+
+svg {
+  transform: translate(0);
+  fill: currentColor;
+}
+
+html {
+  background-color: #ffffff;
+  font: 400 16px/1.4 Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+}
