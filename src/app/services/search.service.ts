@@ -4,7 +4,7 @@ import {forkJoin, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 
-import {Search} from './search';
+import {Search} from '../models/search';
 
 @Injectable({
   providedIn: 'root'

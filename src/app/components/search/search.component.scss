@@ -55,15 +55,25 @@ $search_color_active: #000;
     }
 
     .sr_title {
-      font-size: 24px;
       color: #58508e;
+      font-size: 24px;
       font-weight: 500;
+      margin-bottom: 10px;
       text-decoration: underline;
     }
 
     .sr_desc {
       font-size: 16px;
       color: #424242;
+    }
+  }
+
+  .sr_empty_result {
+    opacity: 0;
+    transition: opacity 1s .3s;
+
+    &.show {
+      opacity: 1;
     }
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {SearchService} from '../search.service';
-import {Search} from '../search';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from '../../services/search.service';
+import {Search} from '../../models/search';
 import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
@@ -36,10 +36,14 @@ export class SearchComponent implements OnInit {
   }
 
   setClasses() {
-    const classes = {
+    return {
       animated: this.animateInput
     };
+  }
 
-    return classes;
+  showEmptyResult() {
+    return {
+      show: this.animateInput
+    };
   }
 }
