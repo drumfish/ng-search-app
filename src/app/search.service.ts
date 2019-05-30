@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {forkJoin, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 
 
 import {Search} from './search';
@@ -10,27 +10,37 @@ import {Search} from './search';
   providedIn: 'root'
 })
 export class SearchService {
-  private heroesUrl = 'api/searchList';  // URL to web api
+  // Comming from fake api in-memory-data.service.ts
+  private apiUrl = 'api/searchList';
 
-  constructor(private http: HttpClient) {}
-
-
-  getSearchList(): Observable<Search[]> {
-    return this.http.get<Search[]>(this.heroesUrl).pipe(
-      catchError(this.handleError<Search[]>('getHeroes', []))
-    );
+  constructor(private http: HttpClient) {
   }
 
   searchList(term: string): Observable<Search[]> {
+    // If incoming term is empty return empty array
     if (!term.trim()) {
-      // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Search[]>(`${this.heroesUrl}/?title=${term}`)
-        .pipe(catchError(this.handleError<Search[]>('searchList', [])))
-      &&
-      this.http.get<Search[]>(`${this.heroesUrl}/?desc=${term}`)
-        .pipe(catchError(this.handleError<Search[]>('searchList', [])));
+
+    const getTitle = this.http.get<Search[]>(`${this.apiUrl}/?title=${term}`)
+      .pipe(catchError(this.handleError<Search[]>('searchList', [])));
+
+    const getDescription = this.http.get<Search[]>(`${this.apiUrl}/?desc=${term}`)
+      .pipe(catchError(this.handleError<Search[]>('searchList', [])));
+
+    return forkJoin([getTitle, getDescription]).pipe(map(responses => {
+      const joinedResults = [].concat(...responses);
+      const set = new Set();
+
+      // Check whether we got duplicates in response
+      const filterDuplicates = joinedResults.filter(res => {
+        const duplicate = set.has(res.id);
+        set.add(res.id);
+        return !duplicate;
+      });
+
+      return filterDuplicates;
+    }));
   }
 
   /**

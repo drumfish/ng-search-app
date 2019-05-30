@@ -14,10 +14,13 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 14, title: 'Celeritas', desc: 'lorem  ipsum dolor v lorem  ipsum dolor' },
       { id: 15, title: 'Magneta',   desc: 'lorem  ipsum dolor v lorem  ipsum dolor' },
       { id: 16, title: 'RubberMan', desc: 'lorem  ipsum dolor v lorem  ipsum dolor' },
-      { id: 17, title: 'Dynama',    desc: 'lorem ipsum dolor v lorem ipsum dolor' },
+      { id: 17, title: 'Drynama Tor',    desc: 'lorem ipsum dolor v lorem ipsum dolor' },
       { id: 18, title: 'Dr IQ',     desc: 'lorem  ipsum dolor v lorem  ipsum dolor' },
       { id: 19, title: 'Magma',     desc: 'lorem  ipsum dolor v lorem  ipsum dolor' },
-      { id: 20, title: 'Tornado',   desc: 'lorem ipsum dolor v lorem ipsum dolor' }
+      { id: 20, title: 'Tornado',   desc: 'lorem ipsum dolor v lorem ipsum dolor' },
+      { id: 20, title: 'Tornado',   desc: 'lorem ipsum dolor v lorem ipsum dolor' },
+      { id: 20, title: 'Tornado',   desc: 'lorem ipsum dolor v lorem ipsum dolor' },
+      { id: 20, title: 'Tornado',   desc: 'lorem ipsum dolor v lorem ipsum dolor' },
     ];
     return {searchList};
   }
