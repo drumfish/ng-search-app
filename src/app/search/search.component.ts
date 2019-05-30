@@ -11,6 +11,7 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
   searchResults: Observable<Search[]>;
+  animateInput: boolean;
   private searchTerms = new Subject<string>();
 
   constructor(private searchService: SearchService) {}
@@ -18,6 +19,7 @@ export class SearchComponent implements OnInit {
   // Push a search term into the observable stream.
   search(term: string) {
     this.searchTerms.next(term);
+    this.animateInput = true;
   }
 
   ngOnInit() {
@@ -31,5 +33,13 @@ export class SearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.searchService.searchList(term)),
     );
+  }
+
+  setClasses() {
+    const classes = {
+      animated: this.animateInput
+    };
+
+    return classes;
   }
 }
