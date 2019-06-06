@@ -22,6 +22,12 @@ export class SearchComponent implements OnInit {
     this.animateInput = term !== '';
   }
 
+  public highlight(term: string, query: any) {
+    return term.replace(new RegExp(query, 'gi'), match => {
+      return '<span class="highlight_text">' + match + '</span>';
+    });
+  }
+
   ngOnInit() {
     this.searchResults = this.searchTerms.pipe(
       // wait 500ms after each key pressed
