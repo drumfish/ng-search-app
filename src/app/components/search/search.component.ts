@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   // Push a search term into the observable stream.
   search(term: string) {
     this.searchTerms.next(term);
-    this.animateInput = true;
+    this.animateInput = term !== '';
   }
 
   ngOnInit() {

@@ -8,6 +8,8 @@ import {InMemoryDataService} from './services/in-memory-data.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { SearchComponent } from './components/search/search.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { SearchComponent } from './components/search/search.component';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false, delay: 500}
-    )
+    ),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]
