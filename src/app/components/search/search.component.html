@@ -9,8 +9,9 @@
     </svg>
   </div>
 
-
   <div class="search_results">
+    <div [ngClass]="setClassShowSpinner()" class="loader"></div>
+
     <div class="search_result" *ngFor="let searchResult of searchResults | async">
       <div
         class="sr_title"
@@ -23,7 +24,7 @@
       >
       </div>
     </div>
-    <div *ngIf="(searchResults | async)?.length <= 0" class="sr_empty_result" [ngClass]="showEmptyResult()">
+    <div *ngIf="(searchResults | async)?.length === 0" class="sr_empty_result" [ngClass]="showEmptyResult()">
       No results by requested keyword.
     </div>
   </div>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../../services/search.service';
 import {Search} from '../../models/search';
 import {Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -12,6 +12,7 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 export class SearchComponent implements OnInit {
   searchResults: Observable<Search[]>;
   animateInput: boolean;
+  showSpinner: boolean;
   private searchTerms = new Subject<string>();
 
   constructor(private searchService: SearchService) {}
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit {
   search(term: string) {
     this.searchTerms.next(term);
     this.animateInput = term !== '';
+    this.showSpinner = true;
   }
 
   public highlight(term: string, query: any) {
@@ -38,6 +40,7 @@ export class SearchComponent implements OnInit {
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.searchService.searchList(term)),
+      tap(() => this.showSpinner = false)
     );
   }
 
@@ -49,7 +52,13 @@ export class SearchComponent implements OnInit {
 
   showEmptyResult() {
     return {
-      show: this.animateInput
+      hide: !this.animateInput
+    };
+  }
+
+  setClassShowSpinner() {
+    return {
+      show: this.showSpinner
     };
   }
 }
