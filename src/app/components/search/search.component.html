@@ -10,7 +10,7 @@
   </div>
 
   <div class="search_results">
-    <div [ngClass]="setClassShowSpinner()" class="loader"></div>
+    <app-loader [showLoader]="showLoader"></app-loader>
 
     <div class="search_result" *ngFor="let searchResult of searchResults | async">
       <div

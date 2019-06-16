@@ -12,7 +12,7 @@ import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators
 export class SearchComponent implements OnInit {
   searchResults: Observable<Search[]>;
   animateInput: boolean;
-  showSpinner: boolean;
+  showLoader: boolean;
   private searchTerms = new Subject<string>();
 
   constructor(private searchService: SearchService) {}
@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   search(term: string) {
     this.searchTerms.next(term);
     this.animateInput = term !== '';
-    this.showSpinner = true;
+    this.showLoader = true;
   }
 
   public highlight(term: string, query: any) {
@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.searchService.searchList(term)),
-      tap(() => this.showSpinner = false)
+      tap(() => this.showLoader = false)
     );
   }
 
@@ -53,12 +53,6 @@ export class SearchComponent implements OnInit {
   showEmptyResult() {
     return {
       hide: !this.animateInput
-    };
-  }
-
-  setClassShowSpinner() {
-    return {
-      show: this.showSpinner
     };
   }
 }
